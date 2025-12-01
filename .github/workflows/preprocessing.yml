@@ -50,7 +50,7 @@ jobs:
         shell: bash -le {0}
         run: |
           echo "Running preprocessing script..."
-          preprocessing/automate_Fathur-Rahman.py 
+          python preprocessing/automate_Fathur-Rahman.py 
 
     
       # 4. Upload Hasil Preprocessing
