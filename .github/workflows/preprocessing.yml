@@ -1,0 +1,65 @@
+name: Run Preprocessing
+
+on:
+  # Trigger manual (workflow_dispatch) sangat umum untuk preprocessing
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch untuk menjalankan workflow (misal: main)'
+        required: true
+        default: 'main'
+
+jobs:
+  preprocess:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          # Checkout branch yang ditentukan oleh user input
+          ref: ${{ github.event.inputs.branch }}
+
+      
+      # 1. Setup Conda Environment
+     
+      - name: Setup Conda Environment
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          # Menggunakan nama environment dari conda.yaml Anda (Workflow-ci)
+          activate-environment: Workflow-ci
+          # Pastikan path ke conda.yaml benar relatif terhadap root
+          environment-file: conda.yaml 
+          auto-activate: false
+          auto-update-conda: true
+          python-version: 3.12.7 # Sesuai dengan conda.yaml
+
+      # 2. Verifikasi Environment (opsional)
+      - name: Verify Conda Environment
+        shell: bash -le {0}
+        run: |
+          echo "Verifying environment setup..."
+          conda info --envs
+          which python
+          python -m pip list
+
+      
+      # 3. Jalankan Skrip Preprocessing
+      
+      - name: Run Preprocessing Script
+        shell: bash -le {0}
+        run: |
+          echo "Running preprocessing script..."
+          # CATATAN: Ganti 'preprocessing.py' dengan nama skrip Anda yang sebenarnya.
+          # Jika skrip Anda ada di subfolder, sesuaikan path-nya.
+          python preprocessing.py 
+
+    
+      # 4. Upload Hasil Preprocessing
+  
+      - name: Upload Preprocessed Data Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: preprocessed-data-amazon
+          # Path data yang dihasilkan oleh skrip preprocessing Anda (sesuai dengan yang digunakan modelling.py)
+          path: amazon_preprocessed.csv

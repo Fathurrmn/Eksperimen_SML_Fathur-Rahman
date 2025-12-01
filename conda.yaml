@@ -1,0 +1,23 @@
+name: Workflow-ci
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  # Python dasar
+  - python=3.12.7 
+
+  # Data Manipulation & I/O
+  - pandas>=1.4.0
+
+  # Machine Learning
+  - scikit-learn>=1.0.0 # Digunakan untuk train_test_split, TfidfVectorizer, LogisticRegression, Pipeline, dan metrik
+
+  # MLOps & Tracking
+  - mlflow=2.18.0 # Versi spesifik MLflow yang diminta
+
+  - pip
+  - pip:
+    # Library tambahan yang mungkin diperlukan oleh MLflow atau sistem
+    - protobuf
+    - psutil 
+    - requests

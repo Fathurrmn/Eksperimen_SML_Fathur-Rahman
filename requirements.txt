@@ -1,0 +1,8 @@
+# requirements.txt
+pandas
+numpy
+scikit-learn
+mlflow==2.18.0 
+matplotlib
+seaborn
+prometheus_client
