@@ -60,4 +60,4 @@ jobs:
         with:
           name: preprocessed-data-amazon
           # Path data yang dihasilkan oleh skrip preprocessing Anda (sesuai dengan yang digunakan modelling.py)
-          path: amazon_preprocessed.csv
+          path: preprocessing/amazon_preprocessed.csv
