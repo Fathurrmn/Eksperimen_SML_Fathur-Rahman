@@ -50,9 +50,7 @@ jobs:
         shell: bash -le {0}
         run: |
           echo "Running preprocessing script..."
-          # CATATAN: Ganti 'preprocessing.py' dengan nama skrip Anda yang sebenarnya.
-          # Jika skrip Anda ada di subfolder, sesuaikan path-nya.
-          python preprocessing.py 
+          automate_Fathur-Rahman.py 
 
     
       # 4. Upload Hasil Preprocessing
